@@ -1,0 +1,77 @@
+import{_ as n}from"./plugin-vue_export-helper-c27b6911.js";import{o as s,c as a,f as e}from"./app-8da2a3ac.js";const t={},i=e(`<h2 id="介绍" tabindex="-1"><a class="header-anchor" href="#介绍" aria-hidden="true">#</a> 介绍</h2><p>本地仓库是</p><h2 id="创建" tabindex="-1"><a class="header-anchor" href="#创建" aria-hidden="true">#</a> 创建</h2><p>使用 <code>git init</code> 创建本地仓库, 在创建位置会创建 .git 隐藏文件夹<br> 仓库所有配置及版本文件均保存在 .git 文件夹中</p><div class="language-bash line-numbers-mode" data-ext="sh"><pre class="language-bash"><code> $ <span class="token function">mkdir</span> <span class="token parameter variable">-p</span> ~/Desktop/repository                 <span class="token comment"># 在左面创建 repository 文件夹 </span>
+ $ <span class="token builtin class-name">cd</span> ~/Desktop/repository                       <span class="token comment"># 进入 repository 文件夹</span>
+
+ $ <span class="token function">git</span> init                                      <span class="token comment"># 在 repository 目录下创建本地仓库</span>
+ <span class="token operator">&gt;</span> Initialized empty Git repository <span class="token keyword">in</span> /root/Desktop/repository/.git/
+
+ $ <span class="token function">ls</span> <span class="token parameter variable">-a</span>                                         <span class="token comment"># 查看创建的隐藏文件夹</span>
+ <span class="token operator">&gt;</span> <span class="token builtin class-name">.</span>  <span class="token punctuation">..</span>  .git
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="状态" tabindex="-1"><a class="header-anchor" href="#状态" aria-hidden="true">#</a> 状态</h2><blockquote><p>git-status - Show the working tree status</p></blockquote><p>git 用一下3种描述表示<strong>文件状态</strong>, 进一步可划分为<strong>未追踪</strong>和<strong>已追踪</strong><br> 工作区 -- <code>git add</code> --&gt; 暂存区 -- <code>git commit</code> --&gt; 本地仓库</p><table><thead><tr><th style="text-align:left;">区域</th><th style="text-align:center;">描述</th><th style="text-align:center;">状态</th></tr></thead><tbody><tr><td style="text-align:left;"><code>Untracked files</code></td><td style="text-align:center;">新增文件</td><td style="text-align:center;">文件处于工作区, 未被追踪</td></tr><tr><td style="text-align:left;"><code>Changes not staged for commit</code></td><td style="text-align:center;">有新修改的文件</td><td style="text-align:center;">文件处于工作区, 新修改未被追踪</td></tr><tr><td style="text-align:left;"><code>Changes to be committed</code></td><td style="text-align:center;">无修改的文件</td><td style="text-align:center;">文件处于暂存区, 修改已追踪</td></tr></tbody></table><div class="language-bash line-numbers-mode" data-ext="sh"><pre class="language-bash"><code> $ <span class="token function">git</span> status                                    <span class="token comment"># 查看本地仓库状态, 有新增文件未被记录</span>
+ <span class="token operator">&gt;</span> Untracked files:                              <span class="token comment"># 新增文件 first_file.txt</span>
+ <span class="token operator">&gt;</span>      first_file.txt
+ <span class="token operator">&gt;</span>
+ <span class="token operator">&gt;</span> Changes to be committed:                      <span class="token comment"># ADD 新文件 first_file.txt, 待 commit</span>
+ <span class="token operator">&gt;</span>      new file:   first_file.txt
+ <span class="token operator">&gt;</span>
+ <span class="token operator">&gt;</span> Changes not staged <span class="token keyword">for</span> commit:                <span class="token comment"># 已被记录文件 first_file.txt，又有新修改但未被记录</span>
+ <span class="token operator">&gt;</span>      modified:   first_file.txt
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><blockquote><p>git-add - Add file contents to the index</p></blockquote><p>追踪本地仓库的修改, 追踪的文件内容进入暂存区, 等待新的 ADD 覆盖或者 commit 生成版本</p><div class="language-bash line-numbers-mode" data-ext="sh"><pre class="language-bash"><code> $ <span class="token function">git</span> <span class="token function">add</span> <span class="token operator">&lt;</span>file<span class="token operator">&gt;</span>                                <span class="token comment"># 记录指定文件修改</span>
+ $ <span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>                                     <span class="token comment"># 记录当前目录下所有文件修改(上层文件未记录)</span>
+ $ <span class="token function">git</span> <span class="token function">add</span> <span class="token parameter variable">--all</span>                                 <span class="token comment"># 记录仓库目录下所有文件修改(推荐)</span>
+
+ $ <span class="token function">git</span> status                                    <span class="token comment"># 新增文件已被记录</span>
+ <span class="token operator">&gt;</span> Changes not staged <span class="token keyword">for</span> commit:                <span class="token comment"># 文件被修改但未被记录</span>
+         modified:   first_file.txt
+
+ $ <span class="token function">git</span> <span class="token function">add</span> <span class="token parameter variable">--all</span>                                 <span class="token comment"># 记录 repository 目录下所有修改</span>
+
+ $ <span class="token function">git</span> status
+ <span class="token operator">&gt;</span> Changes to be committed:                      <span class="token comment"># 文件修改已被记录, 待 commit</span>
+         modified:   first_file.txt
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><blockquote><p>git-commit - Record changes to the repository</p></blockquote><p>将暂存区的文件内容生成可回溯的版本</p><div class="language-bash line-numbers-mode" data-ext="sh"><pre class="language-bash"><code> $ <span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">&quot;&lt;commit message&gt;&quot;</span>              <span class="token comment"># message 较短描述可直接填写</span>
+ $ <span class="token function">git</span> commit <span class="token parameter variable">-s</span>                                 <span class="token comment"># message 较长, 使用默认编辑器编辑 commit</span>
+ $ <span class="token function">git</span> commit <span class="token parameter variable">--amend</span>                            <span class="token comment"># 在上次 commit 基础上修改, 并替换原来的 commit</span>
+ $ <span class="token function">git</span> commit <span class="token parameter variable">--amend</span> --no-edit                  <span class="token comment"># 使用上次 commit 且不修改, 即本次 commit 和上次合并</span>
+
+ $ <span class="token function">git</span> checkout --<span class="token operator">&lt;</span>file<span class="token operator">&gt;</span>                         <span class="token comment"># 撤销工作区的修改, 回到上次 commit 状态</span>
+
+ $ <span class="token function">git</span> status
+ <span class="token operator">&gt;</span> Changes to be committed:                      <span class="token comment"># 文件修改已被记录, 待 commit</span>
+         modified:   first_file.txt
+
+ $ <span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">&quot;first commit&quot;</span>                  <span class="token comment"># 暂存区文件内容生成版本</span>
+ <span class="token operator">&gt;</span>  <span class="token number">1</span> <span class="token function">file</span> changed, <span class="token number">1</span> insertion<span class="token punctuation">(</span>+<span class="token punctuation">)</span>
+
+ $ <span class="token function">git</span> status                                    <span class="token comment"># 修改已保存生成版本</span>
+ <span class="token operator">&gt;</span> nothing to commit, working tree clean
+
+ $ <span class="token function">git</span> log                                       <span class="token comment"># 查看 commit 版本信息</span>
+ <span class="token operator">&gt;</span> commit 38c1df5cf2bed00f5b7365ee4913916e25238009 <span class="token punctuation">(</span>HEAD -<span class="token operator">&gt;</span> master<span class="token punctuation">)</span>
+ <span class="token operator">&gt;</span> Author: facser <span class="token operator">&lt;</span>root@facser<span class="token operator">&gt;</span>
+ <span class="token operator">&gt;</span> Date:   Mon Feb <span class="token number">13</span> <span class="token number">20</span>:42:18 <span class="token number">2023</span> +0800
+
+    first commit                                 <span class="token comment"># 本次版本描述 </span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><blockquote><p>git-log - Show commit logs</p></blockquote><div class="language-bash line-numbers-mode" data-ext="sh"><pre class="language-bash"><code> $ <span class="token function">git</span> log                                       <span class="token comment"># 显示所有 commit 的版本的详细信息</span>
+
+ $ <span class="token function">git</span> log <span class="token parameter variable">--pretty</span><span class="token operator">=</span>oneline                      <span class="token comment"># 显示 commit 版本的简略信息</span>
+ <span class="token operator">&gt;</span> 38c1df5cf2bed00f5b7365ee4913916e25238009 <span class="token punctuation">(</span>HEAD -<span class="token operator">&gt;</span> master<span class="token punctuation">)</span> first commit
+ <span class="token operator">&gt;</span> d2716b6e88567c3fdfe390580d48ca82b581c04f <span class="token punctuation">(</span>HEAD -<span class="token operator">&gt;</span> master<span class="token punctuation">)</span> <span class="token function">add</span> <span class="token function">file</span> and line
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><blockquote><p>git-reset - Reset current HEAD to the specified state</p></blockquote><p>通过 <code>git log</code> 定位回退的版本, 使用 <code>git reset</code> 执行回退</p><div class="language-bash line-numbers-mode" data-ext="sh"><pre class="language-bash"><code> $ <span class="token function">git</span> reset <span class="token parameter variable">--hard</span> HEAD <span class="token operator">&lt;</span>commit number<span class="token operator">&gt;</span>         <span class="token comment"># 回到指定 commit 版本</span>
+
+ $ <span class="token function">git</span> reset <span class="token parameter variable">--hard</span> HEAD^                        <span class="token comment"># 回退到上个版本</span>
+ <span class="token operator">&gt;</span> HEAD is now at d2716b6 <span class="token function">add</span> <span class="token function">file</span> and line
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><blockquote><p>git-diff - Show changes between commits, commit and working tree, etc</p></blockquote><p>未被追踪(not ADD)和已追踪(ADD)内容进行比对, 已被追踪则不比对</p><div class="language-bash line-numbers-mode" data-ext="sh"><pre class="language-bash"><code> $ <span class="token function">git</span> <span class="token function">diff</span>
+ <span class="token operator">&gt;</span> <span class="token function">diff</span> <span class="token parameter variable">--git</span> a/file b/file                      <span class="token comment"># file 已 ADD 和未 ADD 比对</span>
+ <span class="token operator">&gt;</span> index 08fe272<span class="token punctuation">..</span>06fcdd7 <span class="token number">100644</span>
+ <span class="token operator">&gt;</span> --- a/file                                    <span class="token comment"># - 开头是被追踪的内容</span>
+ <span class="token operator">&gt;</span> +++ b/file                                    <span class="token comment"># + 开头是未被追踪的内容</span>
+ <span class="token operator">&gt;</span> @@ <span class="token parameter variable">-1</span> +1,2 @@
+ <span class="token operator">&gt;</span> first line
+ <span class="token operator">&gt;</span> +second line                                  <span class="token comment"># 新增行</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><blockquote><p>git-push - Update remote refs along with associated objects</p></blockquote><p>将本地所有新增的 commit 推送到远端仓库</p><div class="language-bash line-numbers-mode" data-ext="sh"><pre class="language-bash"><code> $ <span class="token function">git</span> push origin master                        <span class="token comment"># 提交所有 commit 到 origin 仓库的 master 分支</span>
+ $ <span class="token function">git</span> push <span class="token parameter variable">-u</span> origin master                     <span class="token comment"># 将 origin 仓库 master 分支作为拉取和推送的默认值</span>
+
+ $ <span class="token function">git</span> push <span class="token operator">&lt;</span>repo<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>branch<span class="token operator">&gt;</span>                      <span class="token comment"># 使用过 -u 后可以省略仓库和分支</span>
+ <span class="token operator">&gt;</span> To github.com:facser/Learning.git
+   309ae9f<span class="token punctuation">..</span>74beac3  main -<span class="token operator">&gt;</span> main
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>`,27),o=[i];function c(l,p){return s(),a("div",null,o)}const m=n(t,[["render",c],["__file","git-1-local.html.vue"]]);export{m as default};
